@@ -10,64 +10,30 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using WpfCustomControlLibrary1;
 
 namespace WpfBrowserApp1
 {
     /// <summary>
-    /// Page1.xaml 的交互逻辑
+    /// ControlsTest.xaml 的交互逻辑
     /// </summary>
-    public partial class Page1 : Page
+    public partial class ControlsTest : Window
     {
-        public Page1()
+        public ControlsTest()
         {
             InitializeComponent();
-            //this.button5.MouseLeftButtonDown += canvas_MouseLeftButtonDown;
-            //this.button5.MouseMove += canvas_MouseMove;
-            //this.button5.MouseLeftButtonUp += canvas_MouseLeftButtonUp;
-
-            //this.button5.PreviewMouseLeftButtonDown += canvas_MouseLeftButtonDown;
-
 
             button5.AddHandler(Button.MouseLeftButtonDownEvent, new MouseButtonEventHandler(canvas_MouseLeftButtonDown), true);//注册事件
             button5.AddHandler(Button.MouseLeftButtonUpEvent, new MouseButtonEventHandler(canvas_MouseLeftButtonUp), true);//注册事件
             button5.AddHandler(Button.MouseMoveEvent, new MouseEventHandler(canvas_MouseMove), true);//注册事件   
-
-            //this.button6.MouseLeftButtonDown += canvas_MouseLeftButtonDown;
-            //this.button6.MouseMove += canvas_MouseMove;
-            //this.button6.MouseLeftButtonUp += canvas_MouseLeftButtonUp;
         }
-
-        ControlsTest controlsTest;
 
 
         private void button1_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-
-            if (controlsTest != null && !controlsTest.IsActive)
-            {
-                controlsTest.Focus();
-                controlsTest.Activate();
-                controlsTest.Topmost = true;
-            }
-            else
-            {
-                if (controlsTest == null)
-                {
-                    controlsTest = new ControlsTest();
-                    controlsTest.Show();
-                }
-                else
-                {
-                    controlsTest.Focus();
-                    controlsTest.Activate();
-                    controlsTest.Topmost = true;
-                }
-            }
-
+        
         }
+
 
         private void button2_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -96,18 +62,18 @@ namespace WpfBrowserApp1
             double dy = e.GetPosition(this.canvas).Y;
 
             int fx = (int)((dx - 10) / 100);
-            if (fx * 100 > this.WindowWidth - 100)
+            if (fx * 100 > this.ActualWidth - 100)
             {
-                fx = (int)((this.WindowWidth - 10) / 100) - 1;
+                fx = (int)((this.ActualWidth - 10) / 100) - 1;
             }
             if (fx < 0)
             {
                 fx = 0;
             }
             int fy = (int)(dy - 10) / 120;
-            if (fy * 120 > this.WindowHeight - 120)
+            if (fy * 120 > this.ActualHeight - 120)
             {
-                fy = (int)((this.WindowHeight - 10) / 120);
+                fy = (int)((this.ActualHeight - 10) / 120);
             }
             if (fy <= 0)
             {
@@ -129,7 +95,7 @@ namespace WpfBrowserApp1
                         isFind = true;
 
                         dy = dy + 120;
-                        if (dy > this.WindowHeight - 120)
+                        if (dy > this.ActualHeight - 120)
                         {
                             dy = 20;
                             dx = dx + 100;

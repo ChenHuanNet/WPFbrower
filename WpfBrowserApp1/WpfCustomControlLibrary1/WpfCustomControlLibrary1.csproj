@@ -48,20 +48,21 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ControlAttachProperty.cs" />
+    <Compile Include="Controls\ControlAttachProperty.cs" />
     <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="CustomControl1.cs">
+    <Compile Include="Controls\CustomControl1.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DesktopIcon.cs" />
-    <Compile Include="IconButton.cs" />
-    <Compile Include="IconInputbox.cs" />
-    <Compile Include="IconSubmit.cs" />
+    <Compile Include="Controls\DesktopIcon.cs" />
+    <Compile Include="Controls\IconButton.cs" />
+    <Compile Include="Controls\IconInputbox.cs" />
+    <Compile Include="Controls\IconSubmit.cs" />
+    <Compile Include="Events\MyDragEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
