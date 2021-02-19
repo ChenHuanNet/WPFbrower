@@ -63,7 +63,7 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
-                        <Image x:Name="ImageInternal" Source="/images/file2.jpg" VerticalAlignment="Top" MaxHeight="80" HorizontalAlignment="Center"></Image>
+                        <Image x:Name="ImageInternal" Source="/images/file2.jpg" VerticalAlignment="Top" MaxHeight="75" MaxWidth="75" Margin="0,5" HorizontalAlignment="Center"></Image>
                         <TextBlock x:Name="TextBlockInternal" Grid.Row="1"
                                    HorizontalAlignment="Center" VerticalAlignment="Bottom" Text="{Binding Content,RelativeSource={RelativeSource TemplatedParent}}"
                                     Effect="{TemplateBinding Effect}" TextAlignment="Center" Foreground="#fff"  TextTrimming="CharacterEllipsis" >

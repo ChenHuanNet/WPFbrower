@@ -69,18 +69,18 @@ namespace WpfBrowserApp1
             double dy = e.GetPosition(this.canvas).Y;
 
             int fx = (int)((dx - 10) / 100);
-            if (fx > this.WindowWidth - 100)
+            if (fx * 100 > this.WindowWidth - 100)
             {
-                fx = (int)((this.WindowWidth - 10) / 100 - 1);
+                fx = (int)((this.WindowWidth - 10) / 100) - 1;
             }
             if (fx < 0)
             {
                 fx = 0;
             }
             int fy = (int)(dy - 10) / 120;
-            if (fy > this.WindowHeight - 120)
+            if (fy * 120 > this.WindowHeight - 120)
             {
-                fy = (int)((this.WindowHeight - 10) / 120 - 1);
+                fy = (int)((this.WindowHeight - 10) / 120);
             }
             if (fy <= 0)
             {
