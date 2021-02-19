@@ -33,9 +33,13 @@
             <Button  x:Name="button11" Width="179" Foreground="#000" HorizontalAlignment="Left" Margin="20,380">
                 <StackPanel HorizontalAlignment="Left" Width="Auto" Height="Auto" Orientation="Horizontal">
                     <Image Width="20" Height="20" Source="/images/file2.jpg" Stretch="Fill"/>
-                    <TextBlock Margin="5,0,50,0" VerticalAlignment="Center" FontSize="12" Text="Internet Explorer" TextWrapping="Wrap"/>
+                    <TextBlock Margin="5,0,50,0" VerticalAlignment="Center" TextAlignment="Center" HorizontalAlignment="Center" FontSize="12" Text="Internet Explorer" TextWrapping="Wrap"/>
                 </StackPanel>
             </Button>
+
+            <ch:IconSubmit x:Name="submit" Margin="400,260" Icon="{StaticResource DesktopIcon}" Content="提 交" ></ch:IconSubmit>
+            
+            
             <TextBox x:Name="iconTxt" Margin="300,0" Width="300" Height="30" Style="{StaticResource TXTSTYLE}" Tag="{StaticResource DesktopIcon}">
                 <TextBox.Background>
                     <ImageBrush ImageSource="{Binding ElementName=iconTxt,Path=Tag}"></ImageBrush>
