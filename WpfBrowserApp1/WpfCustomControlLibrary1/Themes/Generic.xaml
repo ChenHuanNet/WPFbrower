@@ -63,9 +63,9 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
-                        <Image x:Name="ImageInternal" Source="/images/file2.jpg" VerticalAlignment="Top" MaxHeight="75" MaxWidth="75" Margin="0,5" HorizontalAlignment="Center"></Image>
+                        <Image x:Name="ImageInternal" Source="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:IconButton}},Path=Icon}" VerticalAlignment="Top" MaxHeight="60" MaxWidth="60" Margin="0,10,0,0" HorizontalAlignment="Center"></Image>
                         <TextBlock x:Name="TextBlockInternal" Grid.Row="1"
-                                   HorizontalAlignment="Center" VerticalAlignment="Bottom" Text="{TemplateBinding Content}"
+                                   HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="5,5,0,5" Text="{TemplateBinding Content}"
                                     Effect="{TemplateBinding Effect}" TextAlignment="Center" Foreground="#fff"  TextTrimming="CharacterEllipsis" >
                             <TextBlock.ToolTip>
                                 <TextBlock Text="{TemplateBinding Content}" MaxWidth="300" TextWrapping="Wrap" />

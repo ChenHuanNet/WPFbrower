@@ -18,7 +18,7 @@
             <ch:DesktopIcon x:Name="button2" Margin="20,140" Height="100" Width="80" VerticalAlignment="Top" HorizontalAlignment="Left" Content="第二个" MouseDoubleClick="button2_MouseDoubleClick" >
             </ch:DesktopIcon>
 
-            <ch:IconButton x:Name="button5" Margin="120,140"  Height="100" Width="80" VerticalAlignment="Top" HorizontalAlignment="Left" Content="第5个" Tag="{StaticResource DesktopIcon}"  >
+            <ch:IconButton x:Name="button5" Margin="120,140" Icon="{StaticResource DesktopIcon}"   Height="100" Width="80" VerticalAlignment="Top" HorizontalAlignment="Left" Content="第5个第5个第5个第5个第5个" >
             </ch:IconButton>
 
             <Button x:Name="button10" Width="80" Height="100" Margin="20,260"  VerticalAlignment="Top" HorizontalAlignment="Left" BorderBrush="#fff" BorderThickness="1,1,1,1" Background="Transparent">

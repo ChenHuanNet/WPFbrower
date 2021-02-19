@@ -14,5 +14,11 @@ namespace WpfCustomControlLibrary1
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(IconButton), new FrameworkPropertyMetadata(typeof(IconButton)));
         }
+
+        /// <summary>
+        /// 图标 不是自带的 必须用RelativeSource绑定 {Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:IconButton}},Path=Icon}
+        /// </summary>
+        public string Icon { get; set; }
+
     }
 }
