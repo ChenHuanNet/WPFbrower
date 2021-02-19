@@ -4,6 +4,11 @@
              xmlns:local="clr-namespace:WpfBrowserApp1"
              StartupUri="Page1.xaml">
     <Application.Resources>
-        
+        <!--使用文件形式写入静态资源-->
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="ResourceDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

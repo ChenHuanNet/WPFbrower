@@ -47,8 +47,11 @@ namespace WpfBrowserApp1
 
         private void button2_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            Point p = e.GetPosition(this.canvas);
-            MessageBox.Show($"{p.X},{p.Y}");
+            ////Point p = e.GetPosition(this.canvas);
+            ////MessageBox.Show($"{p.X},{p.Y}");
+            var keys = this.Resources.Keys;
+
+            MessageBox.Show(this.button5.Tag + "");
         }
 
 
