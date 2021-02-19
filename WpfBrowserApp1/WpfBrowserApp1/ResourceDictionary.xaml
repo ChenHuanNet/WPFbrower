@@ -3,4 +3,22 @@
                     xmlns:local="clr-namespace:WpfBrowserApp1"
                     xmlns:system="clr-namespace:System;assembly=mscorlib">
     <system:String x:Key="DesktopIcon" >/images/file2.jpg</system:String>
+    <Style  x:Key="TXTSTYLE" TargetType="{x:Type TextBox}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TextBox}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="40" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Label Background="{TemplateBinding Background}"/>
+                        <Border Grid.Column="1" x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" SnapsToDevicePixels="true">
+                            <ScrollViewer x:Name="PART_ContentHost" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>

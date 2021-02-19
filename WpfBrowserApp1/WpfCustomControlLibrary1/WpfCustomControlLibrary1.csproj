@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="DesktopIcon.cs" />
     <Compile Include="IconButton.cs" />
+    <Compile Include="IconInputbox.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

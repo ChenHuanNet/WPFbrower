@@ -18,8 +18,10 @@
             <ch:DesktopIcon x:Name="button2" Margin="20,140" Height="100" Width="80" VerticalAlignment="Top" HorizontalAlignment="Left" Content="第二个" MouseDoubleClick="button2_MouseDoubleClick" >
             </ch:DesktopIcon>
 
-            <ch:IconButton x:Name="button5" Margin="120,140" Icon="{StaticResource DesktopIcon}"   Height="100" Width="80" VerticalAlignment="Top" HorizontalAlignment="Left" Content="第5个第5个第5个第5个第5个" >
+            <ch:IconButton x:Name="button5" Margin="120,140" Icon="{StaticResource DesktopIcon}"   Height="100" Width="80" VerticalAlignment="Top" HorizontalAlignment="Left" Content="第5个第5个第5个第5个第5个"  >
             </ch:IconButton>
+
+            <ch:IconInputbox x:Name="input1" Margin="120,260" Icon="{StaticResource DesktopIcon}" Text="input 1 input1 input1 input1 input1 input1 input1i nput1inp ut1i nput1i nput 1in put1" Foreground="#000" HorizontalAlignment="Left" Width="200" ></ch:IconInputbox>
 
             <Button x:Name="button10" Width="80" Height="100" Margin="20,260"  VerticalAlignment="Top" HorizontalAlignment="Left" BorderBrush="#fff" BorderThickness="1,1,1,1" Background="Transparent">
                 <Grid Width="80" Height="100">
@@ -34,9 +36,12 @@
                     <TextBlock Margin="5,0,50,0" VerticalAlignment="Center" FontSize="12" Text="Internet Explorer" TextWrapping="Wrap"/>
                 </StackPanel>
             </Button>
-            <Button x:Name="button12" Content="Button" Margin="120,260" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75"/>
+            <TextBox x:Name="iconTxt" Margin="300,0" Width="300" Height="30" Style="{StaticResource TXTSTYLE}" Tag="{StaticResource DesktopIcon}">
+                <TextBox.Background>
+                    <ImageBrush ImageSource="{Binding ElementName=iconTxt,Path=Tag}"></ImageBrush>
+                </TextBox.Background>
+            </TextBox>
+
         </Canvas>
-
-
     </Grid>
 </Page>

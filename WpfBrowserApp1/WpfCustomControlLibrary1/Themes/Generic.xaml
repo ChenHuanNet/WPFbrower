@@ -15,6 +15,8 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <!--这个不好看，不用了-->
     <Style TargetType="{x:Type local:DesktopIcon}">
         <!--<Setter Property="Background" Value="Transparent"></Setter>-->
         <Setter Property="Template">
@@ -54,6 +56,7 @@
         </Style.Triggers>
     </Style>
 
+    <!--桌面图标-->
     <Style TargetType="{x:Type local:IconButton}">
         <Setter Property="Template">
             <Setter.Value>
@@ -77,10 +80,48 @@
         </Setter>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#1E4C75"  /> 
+                <Setter Property="Background" Value="#1E4C75"  />
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
                 <Setter Property="Background" Value="#275D8D" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!--左侧带图标的输入框-->
+    <Style TargetType="{x:Type local:IconInputbox}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:IconInputbox}">
+                    <Grid  Background="{TemplateBinding Background}"  Height="{TemplateBinding Height}" Width="{TemplateBinding Width}" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <StackPanel  HorizontalAlignment="Left" Width="Auto" Height="Auto"  Background="#DDD" >
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Image Width="20" Height="20" Grid.Row="0" Grid.Column="0" Source="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type local:IconInputbox}},Path=Icon}" Stretch="Fill" Margin="2,2,0,2" />
+                                <TextBox x:Name="txtContentIInternal" Text="{TemplateBinding Text}" Grid.Row="0" Grid.Column="1" 
+                                         MaxWidth="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=local:IconInputbox},Path=MaxInputWidth }"  
+                                         Height="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=local:IconInputbox},Path=MinInputHeight }" 
+                                         Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=local:IconInputbox},Path=InputWidth }" 
+                                         Margin="0,3,3,3" 
+                                         TextWrapping="Wrap"  FontSize="12" TextAlignment="Left"  VerticalAlignment="Center" BorderBrush="{x:Null}" BorderThickness="0"  ></TextBox>
+                            </Grid>
+                        </StackPanel>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#1E4C75"  />
             </Trigger>
         </Style.Triggers>
     </Style>

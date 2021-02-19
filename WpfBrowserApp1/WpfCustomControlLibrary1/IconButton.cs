@@ -20,5 +20,7 @@ namespace WpfCustomControlLibrary1
         /// </summary>
         public string Icon { get; set; }
 
+
+
     }
 }
