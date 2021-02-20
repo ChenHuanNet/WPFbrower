@@ -14,46 +14,35 @@ namespace WpfCustomControlLibrary1
     /// </summary>
     public class MyDragEvent
     {
-        
-        Canvas canvas;
-        double maxWidth;
-        double maxHeight;
-        public MyDragEvent(Canvas canvas, double maxWidth, double maxHeight)
-        {
-            this.canvas = canvas;
-            this.maxWidth = maxWidth;
-            this.maxHeight = maxHeight;
-        }
-
-        Point pos = new Point();
-        public void MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        public static Point MouseLeftButtonDown(object sender, MouseButtonEventArgs e, Canvas canvas)
         {
             Control tmp = (Control)sender;
-            pos = e.GetPosition(this.canvas);
+            Point pos = e.GetPosition(canvas);//鼠标相对于canvas的位置
             tmp.CaptureMouse();
             tmp.Cursor = Cursors.Hand;
+            return pos;
         }
 
-        public void MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        public static void MouseLeftButtonUp(object sender, MouseButtonEventArgs e, Canvas canvas, double maxWidth, double maxHeight)
         {
-            Button tmp = (Button)sender;
+            Control tmp = (Control)sender;
 
-            double dx = e.GetPosition(this.canvas).X;
-            double dy = e.GetPosition(this.canvas).Y;
+            double dx = e.GetPosition(canvas).X;
+            double dy = e.GetPosition(canvas).Y;
 
             int fx = (int)((dx - 10) / 100);
-            if (fx * 100 > this.maxWidth - 100)
+            if (fx * 100 > maxWidth - 100)
             {
-                fx = (int)((this.maxWidth - 10) / 100) - 1;
+                fx = (int)((maxWidth - 10) / 100) - 1;
             }
             if (fx < 0)
             {
                 fx = 0;
             }
             int fy = (int)(dy - 10) / 120;
-            if (fy * 120 > this.maxHeight - 120)
+            if (fy * 120 > maxHeight - 120)
             {
-                fy = (int)((this.maxHeight - 10) / 120);
+                fy = (int)((maxHeight - 10) / 120);
             }
             if (fy <= 0)
             {
@@ -66,7 +55,7 @@ namespace WpfCustomControlLibrary1
             while (true)
             {
                 bool isFind = false;
-                UIElementCollection children = this.canvas.Children;
+                UIElementCollection children = canvas.Children;
                 foreach (UIElement child in children)
                 {
                     Control c = (Control)child;
@@ -75,7 +64,7 @@ namespace WpfCustomControlLibrary1
                         isFind = true;
 
                         dy = dy + 120;
-                        if (dy > this.maxHeight - 120)
+                        if (dy > maxHeight - 120)
                         {
                             dy = 20;
                             dx = dx + 100;
@@ -99,21 +88,23 @@ namespace WpfCustomControlLibrary1
         }
 
         /// <summary>
-        /// 一个图标宽80高100，间距20
+        /// 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        public void MouseMove(object sender, MouseEventArgs e)
+        /// <param name="canvas"></param>
+        /// <param name="pos">前一时刻鼠标位置所在的坐标</param>
+        public static void MouseMove(object sender, MouseEventArgs e, Canvas canvas, ref Point p)
         {
+
             if (e.LeftButton == MouseButtonState.Pressed)
             {
                 Control tmp = (Control)sender;
-                double dx = e.GetPosition(this.canvas).X;
-                double dy = e.GetPosition(this.canvas).Y;
-
+                double dx = e.GetPosition(canvas).X;
+                double dy = e.GetPosition(canvas).Y;
 
                 tmp.Margin = new Thickness(dx, dy, 0, 0);
-                pos = e.GetPosition(this.canvas);
+                p = e.GetPosition(canvas);
             }
         }
     }

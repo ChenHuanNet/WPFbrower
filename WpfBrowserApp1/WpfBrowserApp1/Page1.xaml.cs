@@ -21,23 +21,23 @@ namespace WpfBrowserApp1
     /// </summary>
     public partial class Page1 : Page
     {
+        Point pos = new Point();
         public Page1()
         {
             InitializeComponent();
-            //this.button5.MouseLeftButtonDown += canvas_MouseLeftButtonDown;
-            //this.button5.MouseMove += canvas_MouseMove;
-            //this.button5.MouseLeftButtonUp += canvas_MouseLeftButtonUp;
-
-            //this.button5.PreviewMouseLeftButtonDown += canvas_MouseLeftButtonDown;
 
 
-            button5.AddHandler(Button.MouseLeftButtonDownEvent, new MouseButtonEventHandler(canvas_MouseLeftButtonDown), true);//注册事件
-            button5.AddHandler(Button.MouseLeftButtonUpEvent, new MouseButtonEventHandler(canvas_MouseLeftButtonUp), true);//注册事件
-            button5.AddHandler(Button.MouseMoveEvent, new MouseEventHandler(canvas_MouseMove), true);//注册事件   
+            foreach (var item in this.canvas.Children)
+            {
+                Control c = (Control)item;
+                c.AddHandler(Button.MouseLeftButtonDownEvent, new MouseButtonEventHandler((o, e) => { pos = MyDragEvent.MouseLeftButtonDown(o, e, this.canvas); }), true);//注册事件
+                c.AddHandler(Button.MouseLeftButtonUpEvent, new MouseButtonEventHandler((o, e) => { MyDragEvent.MouseLeftButtonUp(o, e, this.canvas, this.WindowWidth, this.WindowHeight); }), true);//注册事件
+                c.AddHandler(Button.MouseMoveEvent, new MouseEventHandler((o, e) => { MyDragEvent.MouseMove(o, e, this.canvas, ref pos); }), true);//注册事件 
+            }
 
-            //this.button6.MouseLeftButtonDown += canvas_MouseLeftButtonDown;
-            //this.button6.MouseMove += canvas_MouseMove;
-            //this.button6.MouseLeftButtonUp += canvas_MouseLeftButtonUp;
+            //button5.AddHandler(Button.MouseLeftButtonDownEvent, new MouseButtonEventHandler(canvas_MouseLeftButtonDown), true);//注册事件
+            //button5.AddHandler(Button.MouseLeftButtonUpEvent, new MouseButtonEventHandler(canvas_MouseLeftButtonUp), true);//注册事件
+            //button5.AddHandler(Button.MouseMoveEvent, new MouseEventHandler(canvas_MouseMove), true);//注册事件   
         }
 
         ControlsTest controlsTest;
@@ -46,26 +46,8 @@ namespace WpfBrowserApp1
         private void button1_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
 
-            if (controlsTest != null && !controlsTest.IsActive)
-            {
-                controlsTest.Focus();
-                controlsTest.Activate();
-                controlsTest.Topmost = true;
-            }
-            else
-            {
-                if (controlsTest == null)
-                {
-                    controlsTest = new ControlsTest();
-                    controlsTest.Show();
-                }
-                else
-                {
-                    controlsTest.Focus();
-                    controlsTest.Activate();
-                    controlsTest.Topmost = true;
-                }
-            }
+            ControlsTest test = new ControlsTest();
+            test.ShowDialog();
 
         }
 
@@ -79,7 +61,7 @@ namespace WpfBrowserApp1
         }
 
 
-        Point pos = new Point();
+
         private void canvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             Button tmp = (Button)sender;
