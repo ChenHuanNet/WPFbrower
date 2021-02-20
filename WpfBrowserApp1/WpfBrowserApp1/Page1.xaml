@@ -13,7 +13,7 @@
             <ImageBrush ImageSource="/images/img0.jpg" Stretch="Fill"></ImageBrush>
         </Grid.Background>
         <Canvas MinWidth="1000" MinHeight="800" x:Name="canvas">
-            <ch:DesktopIcon x:Name="button1" Margin="20,20" Height="100" MinHeight="100" Width="80" VerticalAlignment="Top" HorizontalAlignment="Left" Content="自定义控件" MouseDoubleClick="button1_MouseDoubleClick" >
+            <!--<ch:DesktopIcon x:Name="button1" Margin="20,20" Height="100" MinHeight="100" Width="80" VerticalAlignment="Top" HorizontalAlignment="Left" Content="自定义控件" MouseDoubleClick="button1_MouseDoubleClick" >
             </ch:DesktopIcon>
             <ch:DesktopIcon x:Name="button2" Margin="20,140" Height="100" Width="80" VerticalAlignment="Top" HorizontalAlignment="Left" Content="第二个" MouseDoubleClick="button2_MouseDoubleClick" >
             </ch:DesktopIcon>
@@ -25,7 +25,7 @@
 
             <Button x:Name="button10" Width="80" Height="100" Margin="20,260"  VerticalAlignment="Top" HorizontalAlignment="Left" BorderBrush="#fff" BorderThickness="1,1,1,1" Background="Transparent">
                 <Grid Width="80" Height="100">
-                    <!--<Image Source="/images/file2.jpg" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="0,0" Height="80" Width="80"/>-->
+                    --><!--<Image Source="/images/file2.jpg" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="0,0" Height="80" Width="80"/>--><!--
                     <TextBlock VerticalAlignment="Top"   HorizontalAlignment="Left"  Text="第三个" Foreground="#fff"  Margin="0,80" Width="80" Height="20" TextAlignment="Center"></TextBlock>
                 </Grid>
             </Button>
@@ -44,7 +44,7 @@
                 <TextBox.Background>
                     <ImageBrush ImageSource="{Binding ElementName=iconTxt,Path=Tag}"></ImageBrush>
                 </TextBox.Background>
-            </TextBox>
+            </TextBox>-->
 
         </Canvas>
     </Grid>

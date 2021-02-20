@@ -90,6 +90,7 @@
     <Compile Include="ControlsTest.xaml.cs">
       <DependentUpon>ControlsTest.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Vo\DesktopButtonVo.cs" />
     <Compile Include="Page1.xaml.cs">
       <DependentUpon>Page1.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -129,6 +130,10 @@
       <Project>{5ced94d3-e64f-4c97-ac8c-9cc90c9d3f17}</Project>
       <Name>WpfCustomControlLibrary1</Name>
     </ProjectReference>
+    <ProjectReference Include="..\WpfUtils\WpfUtils.csproj">
+      <Project>{6c0235ce-3066-466f-9c8a-4a3b92f08c51}</Project>
+      <Name>WpfUtils</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
@@ -145,6 +150,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\file2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Data\tmpdata.xml" />
   </ItemGroup>
   <PropertyGroup>
     <StartArguments />

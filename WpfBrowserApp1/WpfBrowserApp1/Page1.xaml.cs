@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,8 +12,11 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
+using System.Windows.Resources;
 using System.Windows.Shapes;
+using System.Xml;
 using WpfCustomControlLibrary1;
+using WpfUtils;
 
 namespace WpfBrowserApp1
 {
@@ -22,10 +26,13 @@ namespace WpfBrowserApp1
     public partial class Page1 : Page
     {
         Point pos = new Point();
+        XmlUtil xmlUtil;
         public Page1()
         {
             InitializeComponent();
 
+
+            Init();
 
             foreach (var item in this.canvas.Children)
             {
@@ -38,6 +45,83 @@ namespace WpfBrowserApp1
             //button5.AddHandler(Button.MouseLeftButtonDownEvent, new MouseButtonEventHandler(canvas_MouseLeftButtonDown), true);//注册事件
             //button5.AddHandler(Button.MouseLeftButtonUpEvent, new MouseButtonEventHandler(canvas_MouseLeftButtonUp), true);//注册事件
             //button5.AddHandler(Button.MouseMoveEvent, new MouseEventHandler(canvas_MouseMove), true);//注册事件   
+        }
+
+
+        void Init()
+        {
+            #region 启动时串口最大化显示
+            Rect rc = SystemParameters.WorkArea; //获取工作区大小
+            this.Width = rc.Width;
+            this.Height = rc.Height;
+            #endregion
+
+
+            //<ch:IconButton x:Name="button5" Margin="120,140" Icon="{StaticResource DesktopIcon}"   Height="100" Width="80" VerticalAlignment="Top" HorizontalAlignment="Left" Content="第5个第5个第5个第5个第5个"  >
+            // </ch:IconButton>
+
+            Uri uri = new Uri("/Data/tmpdata.xml", UriKind.Relative);//这个就是所以的pack uri。
+
+            StreamResourceInfo info = Application.GetResourceStream(uri);
+            Stream s = info.Stream;
+            //byte[] buffer = new byte[1024 * 1024];
+            //int length;
+            //StringBuilder sb = new StringBuilder();
+            //while ((length = s.Read(buffer, 0, buffer.Length)) > 0)
+            //{
+            //    sb.Append(Encoding.UTF8.GetString(buffer, 0, length));
+            //}
+
+            //用字符串读取，中文编码会报错
+            //string xml = sb.ToString().Trim();
+
+            xmlUtil = new XmlUtil(s);
+
+            List<DesktopButtonVo> buttons = xmlUtil.GetList<DesktopButtonVo>("/Root/DesktopButtonList", "Button");
+
+            int i = 0;
+            int left = 20;
+            int top = 20;
+            foreach (DesktopButtonVo item in buttons)
+            {
+                i++;
+                IconButton iconButton = new IconButton();
+                iconButton.Name = "iconButton" + i;
+                iconButton.Margin = new Thickness(left, top, 0, 0);
+                if (string.IsNullOrWhiteSpace(item.Icon))
+                {
+                    ResourceDictionary resource = (from dict in Application.Current.Resources.MergedDictionaries
+                                                   where dict.Contains("DesktopIcon")
+                                                   select dict).FirstOrDefault();
+
+                    if (resource != null && resource["DesktopIcon"] != null)
+                    {
+                        iconButton.Icon = resource["DesktopIcon"].ToString();
+                    }
+                }
+                else
+                {
+                    iconButton.Icon = item.Icon;
+                }
+
+                iconButton.Height = 100;
+                iconButton.Width = 80;
+                iconButton.VerticalAlignment = VerticalAlignment.Top;
+                iconButton.HorizontalAlignment = HorizontalAlignment.Left;
+                iconButton.Content = item.Title;
+
+                if (iconButton.Margin.Top > this.Height - 120)
+                {
+                    top = 20;
+                    left += 100;
+                    iconButton.Margin = new Thickness(left, top, 0, 0);
+                }
+
+                top += 120;
+
+                this.canvas.Children.Add(iconButton);
+            }
+
         }
 
         ControlsTest controlsTest;
@@ -57,7 +141,7 @@ namespace WpfBrowserApp1
             ////MessageBox.Show($"{p.X},{p.Y}");
             var keys = this.Resources.Keys;
 
-            MessageBox.Show(this.button5.Tag + "");
+            //MessageBox.Show(this.button5.Tag + "");
         }
 
 

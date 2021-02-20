@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Root>
+  <DesktopButtonList>
+    <Button>
+      <Title>自定义控件</Title>
+    </Button>
+    <Button>
+      <Title>管理列表</Title>
+    </Button>
+  </DesktopButtonList>
+</Root>
