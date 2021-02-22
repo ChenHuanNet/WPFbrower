@@ -20,7 +20,10 @@ namespace WpfCustomControlLibrary1
         /// </summary>
         public string Icon { get; set; }
 
-
+        /// <summary>
+        /// 是否可以拖动 根据这个给他判断是否动态增加拖动事件
+        /// </summary>
+        public bool IsDrag { get; set; } = false;
 
     }
 }

@@ -3,9 +3,18 @@
   <DesktopButtonList>
     <Button>
       <Title>自定义控件</Title>
+      <IsDrag>false</IsDrag>
+      <Events>
+        <Event>
+          <EventType>DoubleClick</EventType>
+          <EventName>OpenNewWindow</EventName>
+          <WindowName>ControlsTest</WindowName>
+        </Event>
+      </Events>
     </Button>
     <Button>
       <Title>管理列表</Title>
+      <IsDrag>true</IsDrag>
     </Button>
   </DesktopButtonList>
 </Root>

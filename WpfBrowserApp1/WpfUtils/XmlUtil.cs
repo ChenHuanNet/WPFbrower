@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -6,6 +7,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+using WpfUtils.Vo;
 
 namespace WpfUtils
 {
@@ -32,29 +34,72 @@ namespace WpfUtils
                 if (itemNode.Name.Equals(node))
                 {
                     XmlNodeList propertyNodes = itemNode.ChildNodes;
+                    T model = Activator.CreateInstance<T>();
                     //节点元素，有几个就是几项
                     foreach (var n in propertyNodes)
                     {
-                        T model = Activator.CreateInstance<T>();
                         XmlNode pNode = (XmlNode)n;
                         foreach (var p in properties)
                         {
                             if (pNode.Name.Equals(p.Name))
                             {
-                                p.SetValue(model, pNode.InnerText);
-                                //typeof(T).InvokeMember(p.Name, BindingFlags.SetProperty, null, model, new object[] { pNode.InnerText });
+                                //记录事件信息
+                                if (pNode.Name.Equals("Events"))
+                                {
+                                    List<EventVo> events = new List<EventVo>();
+                                    PropertyInfo[] eventProperties = typeof(EventVo).GetProperties();
+                                    EventVo eventVo = new EventVo();
+                                    foreach (var itemEvent in pNode.ChildNodes)
+                                    {
+                                        XmlNode rootEvents = (XmlNode)itemEvent;
+                                        XmlNodeList xnlEvents = rootEvents.ChildNodes;
+
+                                        foreach (var detailEvent in xnlEvents)
+                                        {
+                                            XmlNode de = (XmlNode)detailEvent;
+                                            foreach (PropertyInfo eventProperty in eventProperties)
+                                            {
+                                                if (de.Name.Equals(eventProperty.Name))
+                                                {
+                                                    if (eventProperty.PropertyType.IsAssignableFrom(typeof(string)))
+                                                        eventProperty.SetValue(eventVo, de.InnerText);
+                                                }
+                                            }
+                                        }
+                                        events.Add(eventVo);
+                                    }
+
+                                    p.SetValue(model, events);
+                                }
+                                else
+                                {
+                                    if (p.PropertyType.IsAssignableFrom(typeof(string)))
+                                    {
+                                        p.SetValue(model, pNode.InnerText);
+                                        //typeof(T).InvokeMember(p.Name, BindingFlags.SetProperty, null, model, new object[] { pNode.InnerText });
+                                    }
+                                    else if (p.PropertyType.IsAssignableFrom(typeof(bool)))
+                                    {
+                                        bool.TryParse(pNode.InnerText, out bool result);
+                                        p.SetValue(model, result);
+                                    }
+                                    //....其他先不加了
+                                }
                                 break;
                             }
                         }
-                        if (model != null)
-                        {
-                            list.Add(model);
-                        }
+
+                    }
+                    if (model != null)
+                    {
+                        list.Add(model);
                     }
                 }
             }
 
             return list;
         }
+
+
     }
 }

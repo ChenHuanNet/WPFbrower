@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -37,9 +38,13 @@ namespace WpfBrowserApp1
             foreach (var item in this.canvas.Children)
             {
                 Control c = (Control)item;
-                c.AddHandler(Button.MouseLeftButtonDownEvent, new MouseButtonEventHandler((o, e) => { pos = MyDragEvent.MouseLeftButtonDown(o, e, this.canvas); }), true);//注册事件
-                c.AddHandler(Button.MouseLeftButtonUpEvent, new MouseButtonEventHandler((o, e) => { MyDragEvent.MouseLeftButtonUp(o, e, this.canvas, this.WindowWidth, this.WindowHeight); }), true);//注册事件
-                c.AddHandler(Button.MouseMoveEvent, new MouseEventHandler((o, e) => { MyDragEvent.MouseMove(o, e, this.canvas, ref pos); }), true);//注册事件 
+                if (c is IconButton && (c as IconButton).IsDrag)
+                {
+                    c.AddHandler(Button.MouseLeftButtonDownEvent, new MouseButtonEventHandler((o, e) => { pos = MyDragEvent.MouseLeftButtonDown(o, e, this.canvas); }), true);//注册事件
+                    c.AddHandler(Button.MouseLeftButtonUpEvent, new MouseButtonEventHandler((o, e) => { MyDragEvent.MouseLeftButtonUp(o, e, this.canvas, this.WindowWidth, this.WindowHeight); }), true);//注册事件
+                    c.AddHandler(Button.MouseMoveEvent, new MouseEventHandler((o, e) => { MyDragEvent.MouseMove(o, e, this.canvas, ref pos); }), true);//注册事件 
+                }
+
             }
 
             //button5.AddHandler(Button.MouseLeftButtonDownEvent, new MouseButtonEventHandler(canvas_MouseLeftButtonDown), true);//注册事件
@@ -109,6 +114,7 @@ namespace WpfBrowserApp1
                 iconButton.VerticalAlignment = VerticalAlignment.Top;
                 iconButton.HorizontalAlignment = HorizontalAlignment.Left;
                 iconButton.Content = item.Title;
+                iconButton.IsDrag = item.IsDrag;
 
                 if (iconButton.Margin.Top > this.Height - 120)
                 {
@@ -148,10 +154,34 @@ namespace WpfBrowserApp1
 
                 top += 120;
 
+                if (item.Events != null)
+                {
+                    foreach (var itemEvent in item.Events)
+                    {
+                        if (itemEvent.EventType.Equals("DoubleClick"))
+                        {
+                            if (itemEvent.EventName.Equals("OpenNewWindow"))
+                            {
+                                string windowName = itemEvent.WindowName;
+                                string namespaceName = System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Namespace;
+                                iconButton.AddHandler(Button.MouseDoubleClickEvent, new MouseButtonEventHandler((o, e) =>
+                                {
+                                    Type type = Type.GetType(namespaceName + "." + windowName);
+                                    object obj = Activator.CreateInstance(type);
+                                    Window window = (Window)obj;
+                                    window.Show();
+                                }), true);//注册事件 
+                            }
+                        }
+                    }
+                }
+
                 this.canvas.Children.Add(iconButton);
             }
 
         }
+
+        #region 没用了
 
         ControlsTest controlsTest;
 
@@ -265,5 +295,7 @@ namespace WpfBrowserApp1
                 pos = e.GetPosition(this.canvas);
             }
         }
+
+        #endregion
     }
 }

@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="StringExtend.cs" />
+    <Compile Include="Vo\EventVo.cs" />
     <Compile Include="XmlUtil.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
