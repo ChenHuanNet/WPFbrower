@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfCoreApp1.Mapper;
 using WpfCoreCustomControlLibrary1;
 
 namespace WpfCoreApp1
@@ -23,11 +24,11 @@ namespace WpfCoreApp1
 
         DesktopSevice desktopSevice;
 
-        public Page1()
+        public Page1(ITempDataMapper tempDataMapper)
         {
             InitializeComponent();
 
-            desktopSevice = new DesktopSevice();
+            desktopSevice = new DesktopSevice(tempDataMapper);
             Init();
 
 

@@ -10,7 +10,7 @@ using WpfCoreApp1.Entity;
 
 namespace WpfCoreApp1.Mapper
 {
-    public class TempDataMapper
+    public class TempDataMapper : ITempDataMapper
     {
         XmlUtil xmlUtil;
         public TempDataMapper()

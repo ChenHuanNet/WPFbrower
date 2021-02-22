@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfCoreApp1.Mapper;
 using WpfCoreCustomControlLibrary1;
 
 namespace WpfCoreApp1
@@ -25,11 +26,11 @@ namespace WpfCoreApp1
 
         DesktopSevice desktopSevice;
 
-        public MainWindow()
+        public MainWindow(DesktopSevice desktopSevice)
         {
             InitializeComponent();
             this.WindowState = WindowState.Maximized;
-            desktopSevice = new DesktopSevice();
+            this.desktopSevice = desktopSevice;
             Init();
         }
 
