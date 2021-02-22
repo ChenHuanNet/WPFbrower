@@ -117,6 +117,35 @@ namespace WpfBrowserApp1
                     iconButton.Margin = new Thickness(left, top, 0, 0);
                 }
 
+
+                while (true)
+                {
+                    bool isFind = false;
+                    UIElementCollection children = canvas.Children;
+                    foreach (UIElement child in children)
+                    {
+                        Control c = (Control)child;
+                        if (c.Margin.Top == top && c.Margin.Left == left && c.Name != iconButton.Name)
+                        {
+                            isFind = true;
+
+                            top += 120;
+                            if (top > this.Height - 120)
+                            {
+                                top = 20;
+                                left += 100;
+                            }
+
+                            break;
+                        }
+                    }
+
+                    if (!isFind)
+                    {
+                        break;
+                    }
+                }
+
                 top += 120;
 
                 this.canvas.Children.Add(iconButton);
