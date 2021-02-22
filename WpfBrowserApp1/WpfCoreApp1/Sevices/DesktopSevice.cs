@@ -110,8 +110,8 @@ namespace WpfCoreApp1
                                     Type type = Type.GetType(namespaceName + "." + windowName);
                                     object obj = Activator.CreateInstance(type);
                                     Window window = (Window)obj;
-                                    window.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-                                    window.Show();
+                                    window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                                    window.ShowDialog();
                                 }), true);//注册事件 
                             }
                         }

@@ -6,7 +6,11 @@
         xmlns:local="clr-namespace:WpfCoreApp1"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-
+    <Grid  x:Name="mainGrid">
+        <Grid.Background>
+            <ImageBrush ImageSource="/images/img0.jpg" Stretch="Fill"></ImageBrush>
+        </Grid.Background>
+        <Canvas MinWidth="1000" MinHeight="800" x:Name="canvas">
+        </Canvas>
     </Grid>
 </Window>
