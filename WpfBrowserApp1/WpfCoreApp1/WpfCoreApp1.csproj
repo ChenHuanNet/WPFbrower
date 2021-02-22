@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Data\tmpdata.xml" />
+    <None Remove="images\file2.jpg" />
+    <None Remove="images\img0.jpg" />
+    <None Remove="images\img2.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WpfCoreCustomControlLibrary1\WpfCoreCustomControlLibrary1.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Data\tmpdata.xml" />
+    <Resource Include="images\file2.jpg" />
+    <Resource Include="images\img0.jpg" />
+    <Resource Include="images\img2.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="ControlsTest.xaml.cs">
+      <DependentUpon>ControlsTest.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+</Project>

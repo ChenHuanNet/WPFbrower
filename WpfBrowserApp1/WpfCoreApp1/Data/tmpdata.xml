@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Root>
+  <DesktopButtonList>
+    <Button>
+      <Title>自定义控件</Title>
+      <IsDrag>false</IsDrag>
+      <Events>
+        <Event>
+          <EventType>DoubleClick</EventType>
+          <EventName>OpenNewWindow</EventName>
+          <WindowName>ControlsTest</WindowName>
+        </Event>
+      </Events>
+    </Button>
+    <Button>
+      <Title>管理列表</Title>
+      <IsDrag>false</IsDrag>
+      <Events>
+        <Event>
+          <EventType>DoubleClick</EventType>
+          <EventName>OpenNewWindow</EventName>
+          <WindowName>ManageDemo</WindowName>
+        </Event>
+      </Events>
+    </Button>
+  </DesktopButtonList>
+  <ManageData>
+    <Item>
+      <Title>row1</Title>
+      <Time>2020-01-02 10:00:00</Time>
+      <Content>this is a test content</Content>
+    </Item>
+    <Item>
+      <Title>row2</Title>
+      <Time>2020-01-02 10:00:00</Time>
+      <Content>this is a test content</Content>
+    </Item>
+  </ManageData>
+</Root>

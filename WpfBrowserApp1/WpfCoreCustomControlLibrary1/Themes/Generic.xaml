@@ -1,0 +1,147 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:WpfCoreCustomControlLibrary1">
+    <Style TargetType="{x:Type local:CustomControl1}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:CustomControl1}">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+     <!--it isn't nice,so don't use it-->
+    <Style TargetType="{x:Type local:DesktopIcon}">
+        <!--<Setter Property="Background" Value="Transparent"></Setter>-->
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:DesktopIcon}">
+                    <Grid MinHeight="{TemplateBinding MinHeight}" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" MaxHeight="100" MaxWidth="80"  >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Image x:Name="ImageInternal" Source="/images/file2.jpg" VerticalAlignment="Top" MaxHeight="80" HorizontalAlignment="Center"></Image>
+                        <TextBlock x:Name="TextBlockInternal" Grid.Row="1"
+                                   HorizontalAlignment="Center" VerticalAlignment="Bottom" Text="{Binding Content,RelativeSource={RelativeSource TemplatedParent}}"
+                                    Effect="{TemplateBinding Effect}" TextAlignment="Center" Foreground="#fff"  TextTrimming="CharacterEllipsis" >
+                            <TextBlock.ToolTip>
+                                <TextBlock Text="{Binding Content,RelativeSource={RelativeSource TemplatedParent}}" MaxWidth="300" TextWrapping="Wrap" />
+                            </TextBlock.ToolTip>
+                        </TextBlock>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Opacity" Value="0.6" />
+                <Setter Property="Background" Value="#1E4C75" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Opacity" Value="0.8" />
+                <Setter Property="Background" Value="#275D8D" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Opacity" Value=".3"/>
+                <Setter Property="Effect" Value="{x:Null}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!--desktop icon-->
+    <Style TargetType="{x:Type local:IconButton}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:IconButton}">
+                    <Grid  Background="{TemplateBinding Background}" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Image x:Name="ImageInternal" Source="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:IconButton}},Path=Icon}" VerticalAlignment="Top" MaxHeight="60" MaxWidth="60" Margin="0,10,0,0" HorizontalAlignment="Center"></Image>
+                        <TextBlock x:Name="TextBlockInternal" Grid.Row="1"
+                                   HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="5,5,0,5" Text="{TemplateBinding Content}"
+                                    Effect="{TemplateBinding Effect}" TextAlignment="Center" Foreground="#fff"  TextTrimming="CharacterEllipsis" >
+                            <TextBlock.ToolTip>
+                                <TextBlock Text="{TemplateBinding Content}" MaxWidth="300" TextWrapping="Wrap" />
+                            </TextBlock.ToolTip>
+                        </TextBlock>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#1E4C75"  />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="#275D8D" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!--inputbox icon-->
+    <Style TargetType="{x:Type local:IconInputbox}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:IconInputbox}">
+                    <StackPanel  HorizontalAlignment="Left" Width="Auto" Height="Auto"  Background="#DDD" >
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Image Width="20" Height="20" Grid.Row="0" Grid.Column="0" Source="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type local:IconInputbox}},Path=Icon}" Stretch="Fill" Margin="2,2,0,2" />
+                            <TextBox x:Name="txtContentIInternal" Text="{TemplateBinding Text}" Grid.Row="0" Grid.Column="1" 
+                                         MaxWidth="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=local:IconInputbox},Path=MaxInputWidth }"  
+                                         Height="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=local:IconInputbox},Path=MinInputHeight }" 
+                                         Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=local:IconInputbox},Path=InputWidth }" 
+                                         Margin="0,3,3,3" 
+                                         TextWrapping="Wrap"  FontSize="12" TextAlignment="Left"  VerticalAlignment="Center" BorderBrush="{x:Null}" BorderThickness="0"  ></TextBox>
+                        </Grid>
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#1E4C75"  />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!--button icon-->
+    <Style TargetType="{x:Type local:IconSubmit}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:IconSubmit}">
+                    <Grid  Background="{TemplateBinding Background}" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <StackPanel HorizontalAlignment="Left" Width="Auto" Height="Auto" Orientation="Horizontal" Margin="2,2,2,2">
+                            <Image Width="20" Height="20" Source="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:IconSubmit}},Path=Icon}" Stretch="Fill"/>
+                            <TextBlock Margin="5,0,5,0" VerticalAlignment="Center" FontSize="12" Foreground="{TemplateBinding Foreground}" Text="{TemplateBinding Content}" TextWrapping="NoWrap"/>
+                        </StackPanel>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#1E4C75"  />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="#275D8D" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+</ResourceDictionary>
