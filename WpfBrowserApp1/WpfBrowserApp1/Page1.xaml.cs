@@ -16,6 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Resources;
 using System.Windows.Shapes;
 using System.Xml;
+using WpfBrowserApp1.Sevices;
 using WpfCustomControlLibrary1;
 using WpfUtils;
 
@@ -27,25 +28,16 @@ namespace WpfBrowserApp1
     public partial class Page1 : Page
     {
         Point pos = new Point();
-        XmlUtil xmlUtil;
+
+        DesktopSevice desktopSevice;
+
         public Page1()
         {
             InitializeComponent();
 
-
+            desktopSevice = new DesktopSevice();
             Init();
 
-            foreach (var item in this.canvas.Children)
-            {
-                Control c = (Control)item;
-                if (c is IconButton && (c as IconButton).IsDrag)
-                {
-                    c.AddHandler(Button.MouseLeftButtonDownEvent, new MouseButtonEventHandler((o, e) => { pos = MyDragEvent.MouseLeftButtonDown(o, e, this.canvas); }), true);//注册事件
-                    c.AddHandler(Button.MouseLeftButtonUpEvent, new MouseButtonEventHandler((o, e) => { MyDragEvent.MouseLeftButtonUp(o, e, this.canvas, this.WindowWidth, this.WindowHeight); }), true);//注册事件
-                    c.AddHandler(Button.MouseMoveEvent, new MouseEventHandler((o, e) => { MyDragEvent.MouseMove(o, e, this.canvas, ref pos); }), true);//注册事件 
-                }
-
-            }
 
             //button5.AddHandler(Button.MouseLeftButtonDownEvent, new MouseButtonEventHandler(canvas_MouseLeftButtonDown), true);//注册事件
             //button5.AddHandler(Button.MouseLeftButtonUpEvent, new MouseButtonEventHandler(canvas_MouseLeftButtonUp), true);//注册事件
@@ -61,122 +53,18 @@ namespace WpfBrowserApp1
             this.Height = rc.Height;
             #endregion
 
+            desktopSevice.AutoCreateDesktopButton(this.canvas, this.Width, this.Height);
 
-            //<ch:IconButton x:Name="button5" Margin="120,140" Icon="{StaticResource DesktopIcon}"   Height="100" Width="80" VerticalAlignment="Top" HorizontalAlignment="Left" Content="第5个第5个第5个第5个第5个"  >
-            // </ch:IconButton>
 
-            Uri uri = new Uri("/Data/tmpdata.xml", UriKind.Relative);//这个就是所以的pack uri。
-
-            StreamResourceInfo info = Application.GetResourceStream(uri);
-            Stream s = info.Stream;
-            //byte[] buffer = new byte[1024 * 1024];
-            //int length;
-            //StringBuilder sb = new StringBuilder();
-            //while ((length = s.Read(buffer, 0, buffer.Length)) > 0)
-            //{
-            //    sb.Append(Encoding.UTF8.GetString(buffer, 0, length));
-            //}
-
-            //用字符串读取，中文编码会报错
-            //string xml = sb.ToString().Trim();
-
-            xmlUtil = new XmlUtil(s);
-
-            List<DesktopButtonVo> buttons = xmlUtil.GetList<DesktopButtonVo>("/Root/DesktopButtonList", "Button");
-
-            int i = 0;
-            int left = 20;
-            int top = 20;
-            foreach (DesktopButtonVo item in buttons)
+            foreach (var item in this.canvas.Children)
             {
-                i++;
-                IconButton iconButton = new IconButton();
-                iconButton.Name = "iconButton" + i;
-                iconButton.Margin = new Thickness(left, top, 0, 0);
-                if (string.IsNullOrWhiteSpace(item.Icon))
+                Control c = (Control)item;
+                if (c is IconButton && (c as IconButton).IsDrag)
                 {
-                    ResourceDictionary resource = (from dict in Application.Current.Resources.MergedDictionaries
-                                                   where dict.Contains("DesktopIcon")
-                                                   select dict).FirstOrDefault();
-
-                    if (resource != null && resource["DesktopIcon"] != null)
-                    {
-                        iconButton.Icon = resource["DesktopIcon"].ToString();
-                    }
+                    c.AddHandler(Button.MouseLeftButtonDownEvent, new MouseButtonEventHandler((o, e) => { pos = MyDragEvent.MouseLeftButtonDown(o, e, this.canvas); }), true);//注册事件
+                    c.AddHandler(Button.MouseLeftButtonUpEvent, new MouseButtonEventHandler((o, e) => { MyDragEvent.MouseLeftButtonUp(o, e, this.canvas, this.WindowWidth, this.WindowHeight); }), true);//注册事件
+                    c.AddHandler(Button.MouseMoveEvent, new MouseEventHandler((o, e) => { MyDragEvent.MouseMove(o, e, this.canvas, ref pos); }), true);//注册事件 
                 }
-                else
-                {
-                    iconButton.Icon = item.Icon;
-                }
-
-                iconButton.Height = 100;
-                iconButton.Width = 80;
-                iconButton.VerticalAlignment = VerticalAlignment.Top;
-                iconButton.HorizontalAlignment = HorizontalAlignment.Left;
-                iconButton.Content = item.Title;
-                iconButton.IsDrag = item.IsDrag;
-
-                if (iconButton.Margin.Top > this.Height - 120)
-                {
-                    top = 20;
-                    left += 100;
-                    iconButton.Margin = new Thickness(left, top, 0, 0);
-                }
-
-
-                while (true)
-                {
-                    bool isFind = false;
-                    UIElementCollection children = canvas.Children;
-                    foreach (UIElement child in children)
-                    {
-                        Control c = (Control)child;
-                        if (c.Margin.Top == top && c.Margin.Left == left && c.Name != iconButton.Name)
-                        {
-                            isFind = true;
-
-                            top += 120;
-                            if (top > this.Height - 120)
-                            {
-                                top = 20;
-                                left += 100;
-                            }
-
-                            break;
-                        }
-                    }
-
-                    if (!isFind)
-                    {
-                        break;
-                    }
-                }
-
-                top += 120;
-
-                if (item.Events != null)
-                {
-                    foreach (var itemEvent in item.Events)
-                    {
-                        if (itemEvent.EventType.Equals("DoubleClick"))
-                        {
-                            if (itemEvent.EventName.Equals("OpenNewWindow"))
-                            {
-                                string windowName = itemEvent.WindowName;
-                                string namespaceName = System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Namespace;
-                                iconButton.AddHandler(Button.MouseDoubleClickEvent, new MouseButtonEventHandler((o, e) =>
-                                {
-                                    Type type = Type.GetType(namespaceName + "." + windowName);
-                                    object obj = Activator.CreateInstance(type);
-                                    Window window = (Window)obj;
-                                    window.Show();
-                                }), true);//注册事件 
-                            }
-                        }
-                    }
-                }
-
-                this.canvas.Children.Add(iconButton);
             }
 
         }

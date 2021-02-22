@@ -79,6 +79,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="ManageDemo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Page1.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -90,6 +94,13 @@
     <Compile Include="ControlsTest.xaml.cs">
       <DependentUpon>ControlsTest.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Entity\GridData.cs" />
+    <Compile Include="ManageDemo.xaml.cs">
+      <DependentUpon>ManageDemo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Mapper\TempDataMapper.cs" />
+    <Compile Include="Sevices\DesktopSevice.cs" />
+    <Compile Include="Sevices\ManageSevice.cs" />
     <Compile Include="Vo\DesktopButtonVo.cs" />
     <Compile Include="Page1.xaml.cs">
       <DependentUpon>Page1.xaml</DependentUpon>
