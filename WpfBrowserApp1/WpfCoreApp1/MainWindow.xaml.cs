@@ -24,19 +24,18 @@ namespace WpfCoreApp1
     {
         Point pos = new Point();
 
-        DesktopSevice desktopSevice;
+        public DesktopSevice desktopSevice { get; set; }
 
-        public MainWindow(DesktopSevice desktopSevice)
+        public MainWindow()
         {
             InitializeComponent();
             this.WindowState = WindowState.Maximized;
-            this.desktopSevice = desktopSevice;
-            Init();
+            //this.desktopSevice = desktopSevice;
+            //Init();
         }
 
 
-
-        void Init()
+        public void Init()
         {
             #region 启动时串口最大化显示
             Rect rc = SystemParameters.WorkArea; //获取工作区大小
@@ -57,6 +56,11 @@ namespace WpfCoreApp1
                     c.AddHandler(Button.MouseMoveEvent, new MouseEventHandler((o, e) => { MyDragEvent.MouseMove(o, e, this.canvas, ref pos); }), true);//注册事件 
                 }
             }
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
 
         }
     }

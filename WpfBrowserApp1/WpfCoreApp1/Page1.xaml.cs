@@ -24,11 +24,11 @@ namespace WpfCoreApp1
 
         DesktopSevice desktopSevice;
 
-        public Page1(ITempDataMapper tempDataMapper)
+        public Page1()
         {
             InitializeComponent();
 
-            desktopSevice = new DesktopSevice(tempDataMapper);
+            desktopSevice = new DesktopSevice();
             Init();
 
 

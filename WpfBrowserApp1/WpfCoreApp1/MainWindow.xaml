@@ -11,6 +11,7 @@
             <ImageBrush ImageSource="/images/img0.jpg" Stretch="Fill"></ImageBrush>
         </Grid.Background>
         <Canvas MinWidth="1000" MinHeight="800" x:Name="canvas">
+            <Button Margin="20,20" Content="提交" Width="100" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Click="Button_Click"></Button>
         </Canvas>
     </Grid>
 </Window>

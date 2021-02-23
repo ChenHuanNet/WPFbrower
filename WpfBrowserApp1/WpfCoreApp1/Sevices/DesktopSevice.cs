@@ -13,11 +13,11 @@ namespace WpfCoreApp1
 {
     public class DesktopSevice
     {
-        ITempDataMapper tempDataMapper;
+        public ITempDataMapper tempDataMapper { get; set; }
 
-        public DesktopSevice(ITempDataMapper tempDataMapper)
+        public DesktopSevice()
         {
-            this.tempDataMapper = tempDataMapper;
+            // this.tempDataMapper = tempDataMapper;
         }
 
 
