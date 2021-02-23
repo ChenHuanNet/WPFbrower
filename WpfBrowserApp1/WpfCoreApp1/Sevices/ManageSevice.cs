@@ -10,10 +10,10 @@ namespace WpfCoreApp1.Sevices
 {
     public class ManageSevice
     {
-        TempDataMapper tempDataMapper;
+        public ITempDataMapper tempDataMapper { get; set; }
         public ManageSevice()
         {
-            tempDataMapper = new TempDataMapper();
+
         }
 
         public List<GridData> GetManageData()

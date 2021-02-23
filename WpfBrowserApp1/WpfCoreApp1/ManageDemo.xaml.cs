@@ -19,17 +19,14 @@ namespace WpfCoreApp1
     public partial class ManageDemo : Window
     {
 
-        ManageSevice manageSevice;
+        public ManageSevice manageSevice { get; set; }
 
         public ManageDemo()
         {
             InitializeComponent();
-
-            manageSevice = new ManageSevice();
-            Init();
         }
 
-        void Init()
+        public void Init()
         {
             var datas = manageSevice.GetManageData();
             this.dataGrid.ItemsSource = datas;

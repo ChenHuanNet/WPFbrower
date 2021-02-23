@@ -10,6 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using WpfCoreApp1.Aop;
+using WpfCoreApp1.Ioc;
 using WpfCoreApp1.Mapper;
 using WpfCoreApp1.Sevices;
 
@@ -23,7 +24,7 @@ namespace WpfCoreApp1
         /// <summary>
         /// autofac
         /// </summary>
-        private IContainer container;
+        //private IContainer container;
 
 
         /// <summary>
@@ -42,7 +43,8 @@ namespace WpfCoreApp1
             var builder = new ContainerBuilder();
             AutofacConfigureSevices(builder);
 
-            container = builder.Build();
+            var container = builder.Build();
+            IocContainer.SetContainer(container);
         }
 
         /// <summary>
@@ -66,6 +68,8 @@ namespace WpfCoreApp1
             builder.RegisterType<DesktopSevice>().PropertiesAutowired();
             builder.RegisterType<ManageSevice>().PropertiesAutowired();
             builder.RegisterType<MainWindow>().PropertiesAutowired();
+            builder.RegisterType<ManageSevice>().PropertiesAutowired();
+            builder.RegisterType<ManageDemo>().PropertiesAutowired();
         }
 
         private void ConfigureServices(IServiceCollection services)
@@ -86,7 +90,7 @@ namespace WpfCoreApp1
         private void Application_Startup(object sender, StartupEventArgs e)
         {
             //autofac 形式
-            var main = container.Resolve<MainWindow>();
+            var main = IocContainer.GetContainer<MainWindow>();
             main.Show();
             main.Init();//因为在 构造函数没执行完的时候，是没办法注入的。所以提成公用方法单独执行
 

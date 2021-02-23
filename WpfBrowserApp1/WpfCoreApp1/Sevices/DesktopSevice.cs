@@ -1,4 +1,5 @@
-﻿using Autofac.Extras.DynamicProxy;
+﻿using Autofac;
+using Autofac.Extras.DynamicProxy;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using WpfCoreApp1.Aop;
+using WpfCoreApp1.Ioc;
 using WpfCoreApp1.Mapper;
 using WpfCoreCustomControlLibrary1;
 
@@ -110,10 +112,17 @@ namespace WpfCoreApp1
                                 iconButton.AddHandler(Button.MouseDoubleClickEvent, new MouseButtonEventHandler((o, e) =>
                                 {
                                     Type type = Type.GetType(namespaceName + "." + windowName);
-                                    object obj = Activator.CreateInstance(type);
+                                    //object obj = Activator.CreateInstance(type);
+                                    object obj = IocContainer.GetContainer(type);
                                     Window window = (Window)obj;
                                     window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                                    var method = type.GetMethod("Init");
+                                    if (method != null)
+                                    {
+                                        method.Invoke(window, new object[] { });
+                                    }
                                     window.ShowDialog();
+
                                 }), true);//注册事件 
                             }
                         }
