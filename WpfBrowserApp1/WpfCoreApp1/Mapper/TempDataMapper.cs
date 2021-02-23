@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Autofac.Extras.DynamicProxy;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -6,10 +7,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Resources;
+using WpfCoreApp1.Aop;
 using WpfCoreApp1.Entity;
 
 namespace WpfCoreApp1.Mapper
 {
+    
     public class TempDataMapper : ITempDataMapper
     {
         XmlUtil xmlUtil;

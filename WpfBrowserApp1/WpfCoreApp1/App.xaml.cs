@@ -1,4 +1,6 @@
 ﻿using Autofac;
+using Autofac.Extras.DynamicProxy;
+using Castle.DynamicProxy;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -7,6 +9,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using WpfCoreApp1.Aop;
 using WpfCoreApp1.Mapper;
 using WpfCoreApp1.Sevices;
 
@@ -54,11 +57,12 @@ namespace WpfCoreApp1
             //builder.RegisterType<ThirdModel>();
             //builder.RegisterInstance(this).As<Form>();
 
-
-
+            //Aop拦截器也要注册 
+            //然后再需要拦截的类后面加 .EnableInterfaceInterceptors().InterceptedBy(typeof(FuncAop)) 全局   或者类头部加属性[Intercept(typeof(FuncAop))]   
+            builder.RegisterType<FuncAop>();
             //注入跟注册顺序没有关系，从内向外和从外向内都试过了。  属性注入必须 {get;set;}   PropertiesAutowired() 是根据反射赋值进去的
-
-            builder.RegisterType<TempDataMapper>().As<ITempDataMapper>().PropertiesAutowired();
+            //.EnableInterfaceInterceptors().InterceptedBy 启动AOP拦截
+            builder.RegisterType<TempDataMapper>().As<ITempDataMapper>().PropertiesAutowired().EnableInterfaceInterceptors().InterceptedBy(typeof(FuncAop));
             builder.RegisterType<DesktopSevice>().PropertiesAutowired();
             builder.RegisterType<ManageSevice>().PropertiesAutowired();
             builder.RegisterType<MainWindow>().PropertiesAutowired();

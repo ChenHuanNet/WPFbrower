@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Autofac.Extras.DynamicProxy;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,11 +7,13 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using WpfCoreApp1.Aop;
 using WpfCoreApp1.Mapper;
 using WpfCoreCustomControlLibrary1;
 
 namespace WpfCoreApp1
 {
+
     public class DesktopSevice
     {
         public ITempDataMapper tempDataMapper { get; set; }
@@ -19,7 +22,6 @@ namespace WpfCoreApp1
         {
             // this.tempDataMapper = tempDataMapper;
         }
-
 
         public void AutoCreateDesktopButton(Canvas canvas, double width, double height)
         {
