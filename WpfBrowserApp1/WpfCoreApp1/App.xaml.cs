@@ -17,11 +17,15 @@ namespace WpfCoreApp1
     /// </summary>
     public partial class App : Application
     {
-
+        /// <summary>
+        /// autofac
+        /// </summary>
         private IContainer container;
 
 
-
+        /// <summary>
+        /// Microsoft.Extensions.DependencyInjection
+        /// </summary>
         ServiceProvider _serviceProvider;
         public App()
         {
@@ -71,7 +75,7 @@ namespace WpfCoreApp1
         }
 
         /// <summary>
-        /// 将启动方式由Uri变成了事件
+        /// 将启动方式由StartupUri变成了事件Startup
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
