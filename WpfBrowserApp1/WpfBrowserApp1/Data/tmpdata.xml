@@ -13,6 +13,28 @@
       </Events>
     </Button>
     <Button>
+      <Title>摄像头</Title>
+      <IsDrag>false</IsDrag>
+      <Events>
+        <Event>
+          <EventType>DoubleClick</EventType>
+          <EventName>OpenNewWindow</EventName>
+          <WindowName>CameraWindow</WindowName>
+        </Event>
+      </Events>
+    </Button>
+    <Button>
+      <Title>摄像头2</Title>
+      <IsDrag>false</IsDrag>
+      <Events>
+        <Event>
+          <EventType>DoubleClick</EventType>
+          <EventName>OpenNewWindow</EventName>
+          <WindowName>CameraWindow2</WindowName>
+        </Event>
+      </Events>
+    </Button>
+    <Button>
       <Title>管理列表</Title>
       <IsDrag>false</IsDrag>
       <Events>
