@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,6 +21,18 @@ namespace WpfCoreApp1.Sevices
         {
             var datas = tempDataMapper.GetManageData();
             return datas;
+        }
+
+
+        public ObservableCollection<GridData> GetObservableData()
+        {
+            ObservableCollection<GridData> samplePersons = new ObservableCollection<GridData>();
+            var datas = GetManageData();
+            foreach (var item in datas)
+            {
+                samplePersons.Add(item);
+            }
+            return samplePersons;
         }
     }
 }

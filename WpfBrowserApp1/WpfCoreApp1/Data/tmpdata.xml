@@ -23,6 +23,17 @@
         </Event>
       </Events>
     </Button>
+    <Button>
+      <Title>MVVM</Title>
+      <IsDrag>false</IsDrag>
+      <Events>
+        <Event>
+          <EventType>DoubleClick</EventType>
+          <EventName>OpenNewWindow</EventName>
+          <WindowName>MvvmWindow</WindowName>
+        </Event>
+      </Events>
+    </Button>
   </DesktopButtonList>
   <ManageData>
     <Item>

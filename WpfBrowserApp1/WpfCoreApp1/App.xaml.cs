@@ -4,6 +4,7 @@ using Castle.DynamicProxy;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.Linq;
@@ -13,6 +14,7 @@ using WpfCoreApp1.Aop;
 using WpfCoreApp1.Ioc;
 using WpfCoreApp1.Mapper;
 using WpfCoreApp1.Sevices;
+using WpfCoreApp1.ViewModel;
 
 namespace WpfCoreApp1
 {
@@ -68,8 +70,10 @@ namespace WpfCoreApp1
             builder.RegisterType<DesktopSevice>().PropertiesAutowired();
             builder.RegisterType<ManageSevice>().PropertiesAutowired();
             builder.RegisterType<MainWindow>().PropertiesAutowired();
-            builder.RegisterType<ManageSevice>().PropertiesAutowired();
             builder.RegisterType<ManageDemo>().PropertiesAutowired();
+
+            builder.RegisterType<MvvmWindowViewModel>().PropertiesAutowired();
+            builder.RegisterType<MvvmWindow>().PropertiesAutowired();
         }
 
         private void ConfigureServices(IServiceCollection services)
