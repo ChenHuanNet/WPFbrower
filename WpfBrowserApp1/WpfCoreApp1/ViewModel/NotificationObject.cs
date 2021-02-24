@@ -12,6 +12,10 @@ namespace WpfCoreApp1.ViewModel
     /// </summary>
     public abstract class NotificationObject : INotifyPropertyChanged
     {
+        /// <summary>
+        /// 这个事件好像在框架里实现了，也可以自己实现，直接DataContext=null; DataContext=ViewModel;就好了。 
+        /// 猜测他封装的肯定也是重新绑定一下。
+        /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void RaisePropertyChanged(string propertyName)

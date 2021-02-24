@@ -14,6 +14,7 @@
         </Grid.RowDefinitions>
         <TextBox Grid.Row="0" Name="searchtxt" Text="{Binding  Path=SearchText, Mode=TwoWay}" HorizontalAlignment="Left" Height="30" Width="280" Margin="10,0,0,0"></TextBox>
         <Button Grid.Row="0" Name="searchBtn" Content="Search" Command="{Binding Path=QueryCommand}" Width="80" Height="30" HorizontalAlignment="Right" Margin="0,0,10,0"></Button>
+        <Button Grid.Row="0" Name="clearBtn" Content="Clear" Command="{Binding Path=ClearCommand}" Width="80" Height="30" HorizontalAlignment="Right" Margin="0,0,100,0"></Button>
         <DataGrid Grid.Row="1" Name="datGrid" 
                   HorizontalAlignment="Center"
                   VerticalAlignment="Top" ItemsSource="{Binding Path=ResultList}" Width="300"></DataGrid>

@@ -32,12 +32,13 @@ namespace WpfCoreApp1
             //这里DataContext不能写在xaml上面。 写在xaml上面会重新new 一个对象就不是容器创建的对象了，就没办法注入了
             this.DataContext = _MvvmWindowViewModel;
 
-            _MvvmWindowViewModel.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler((o, t) =>
-            {
-                //值改变了之后重新绑定到UI
-                this.DataContext = null;
-                this.DataContext = _MvvmWindowViewModel;
-            });
+            //继承了NotificationObject ViewModel不用自己去写PropertyChanged 他会自动绑定
+            //_MvvmWindowViewModel.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler((o, t) =>
+            //{
+            //    //值改变了之后重新绑定到UI
+            //    this.DataContext = null;
+            //    this.DataContext = _MvvmWindowViewModel;
+            //});
         }
     }
 }
