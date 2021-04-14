@@ -52,14 +52,14 @@
 
                     </Rectangle>
                 </Border>
-                <StackPanel Orientation="Horizontal" >
+                <StackPanel Orientation="Horizontal" Grid.Row="0" >
                     <Button x:Name="start" Content="Start" Width="75" Height="30" Margin="20,10,0,10" Click="start_Click" />
                     <Button x:Name="stop" Content="Stop" Width="75" Height="30" Margin="20,10,0,10" Click="stop_Click" />
                     <Button x:Name="resume" Content="Resume" Width="75" Height="30" Margin="20,10,0,10" Click="resume_Click" />
                     <Button x:Name="pause" Content="Pause" Width="75" Height="30" Margin="20,10,0,10" Click="pause_Click" />
                 </StackPanel>
-                <Grid>
-                    <MediaElement x:Name="mediaElement1"></MediaElement>
+                <Grid Grid.Row="1">
+                    <MediaElement x:Name="video" LoadedBehavior="Manual"></MediaElement>
                 </Grid>
             </Grid>
         </Canvas>
