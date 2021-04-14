@@ -71,11 +71,16 @@ namespace WpfCoreApp1
             builder.RegisterType<ManageSevice>().PropertiesAutowired();
             builder.RegisterType<MainWindow>().PropertiesAutowired();
             builder.RegisterType<ManageDemo>().PropertiesAutowired();
+            builder.RegisterType<ControlsTest>().PropertiesAutowired();
 
             builder.RegisterType<MvvmWindowViewModel>().PropertiesAutowired();
             builder.RegisterType<MvvmWindow>().PropertiesAutowired();
         }
 
+        /// <summary>
+        /// .net core 的IOC容器
+        /// </summary>
+        /// <param name="services"></param>
         private void ConfigureServices(IServiceCollection services)
         {
             //这个是利用 Microsoft.Extensions.DependencyInjection 微软.net core自带的包 用构造函数注入的 需要去nuget添加 
