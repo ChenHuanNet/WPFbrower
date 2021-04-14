@@ -72,6 +72,7 @@ namespace WpfCoreApp1
             builder.RegisterType<MainWindow>().PropertiesAutowired();
             builder.RegisterType<ManageDemo>().PropertiesAutowired();
             builder.RegisterType<ControlsTest>().PropertiesAutowired();
+            builder.RegisterType<VideoEncrypt>().PropertiesAutowired();
 
             builder.RegisterType<MvvmWindowViewModel>().PropertiesAutowired();
             builder.RegisterType<MvvmWindow>().PropertiesAutowired();

@@ -34,6 +34,17 @@
         </Event>
       </Events>
     </Button>
+    <Button>
+      <Title>视频加密</Title>
+      <IsDrag>false</IsDrag>
+      <Events>
+        <Event>
+          <EventType>DoubleClick</EventType>
+          <EventName>OpenNewWindow</EventName>
+          <WindowName>VideoEncrypt</WindowName>
+        </Event>
+      </Events>
+    </Button>
   </DesktopButtonList>
   <ManageData>
     <Item>

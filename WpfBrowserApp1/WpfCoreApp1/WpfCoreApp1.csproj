@@ -44,4 +44,13 @@
     </Compile>
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Videos\mda-kfe0b1k93crdnbn7.mp4">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Videos\movie.ogv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
