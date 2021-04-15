@@ -27,8 +27,6 @@ namespace WpfCoreApp1
 
             video.Source = new Uri(path);
 
-            var videoDevices = MultimediaUtil.VideoInputNames;// 获取所有视频设备	 
-            string videoName = videoDevices[0];// 选择第一个
         }
 
 
